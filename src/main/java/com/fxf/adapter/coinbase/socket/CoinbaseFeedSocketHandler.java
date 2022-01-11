@@ -6,8 +6,6 @@ import com.fxf.adapter.coinbase.common.Constants;
 import com.fxf.adapter.coinbase.models.requests.subscribe.SubscribeSocketRequest;
 import com.fxf.adapter.coinbase.services.CoinbaseFeedService;
 import com.fxf.adapter.core.BaseWebsocketAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -16,10 +14,6 @@ import javax.websocket.ClientEndpoint;
 import javax.websocket.CloseReason;
 import javax.websocket.ContainerProvider;
 import javax.websocket.MessageHandler;
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 import java.net.URI;
@@ -55,10 +49,12 @@ public class CoinbaseFeedSocketHandler extends BaseWebsocketAdapter {
         container.connectToServer(this, new URI(coinbaseConfiguration.getWsEndpoint()));
     }
 
+    @Override
     protected void doOpen(Session userSession) {
         subscribe();
     }
 
+    @Override
     protected void doClose(Session userSession, CloseReason reason) {
         this.coinbaseFeedMessageHandler = null;
     }

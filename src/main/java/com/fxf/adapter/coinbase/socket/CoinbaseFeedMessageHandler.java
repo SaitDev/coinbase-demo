@@ -5,12 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fxf.adapter.coinbase.common.Constants;
 import com.fxf.adapter.coinbase.models.requests.BaseSocketRequest;
 import com.fxf.adapter.coinbase.models.responses.BaseSocketResponse;
-import com.fxf.adapter.coinbase.models.responses.ChannelLevel2SocketResponse;
+import com.fxf.adapter.coinbase.models.responses.level2.ChannelLevel2SocketResponse;
 import com.fxf.adapter.coinbase.services.CoinbaseFeedService;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import javax.websocket.MessageHandler;
 import javax.websocket.Session;
@@ -33,7 +31,6 @@ public class CoinbaseFeedMessageHandler implements MessageHandler.Whole<String> 
 
     @Override
     public void onMessage(String message) {
-//        LOG.info(message);
         try {
             BaseSocketResponse response = objectMapper.readValue(message, BaseSocketResponse.class);
             if (Constants.RESPONSE_CHANNEL_LEVEL_2.equals(response.getType())) {

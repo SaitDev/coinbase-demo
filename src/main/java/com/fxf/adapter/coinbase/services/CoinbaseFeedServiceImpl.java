@@ -1,6 +1,6 @@
 package com.fxf.adapter.coinbase.services;
 
-import com.fxf.adapter.coinbase.models.responses.ChannelLevel2SocketResponse;
+import com.fxf.adapter.coinbase.models.responses.level2.ChannelLevel2SocketResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
